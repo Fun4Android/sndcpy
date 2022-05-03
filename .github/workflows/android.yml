@@ -31,5 +31,5 @@ jobs:
     - name: Upload math result for job 1
       uses: actions/upload-artifact@v3
       with:
-        name: sndcpy-artifact
-        path: ./*.apk
+        name: sndcpy-release.apk
+        path: /home/runner/work/sndcpy/sndcpy/app/build/outputs/apk/release/app-release.apk
