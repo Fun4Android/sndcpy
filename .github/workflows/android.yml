@@ -24,3 +24,12 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew assembleRelease
+
+    - name: Display structure of downloaded files
+      run: ls -R
+
+    - name: Upload math result for job 1
+      uses: actions/upload-artifact@v3
+      with:
+        name: sndcpy-artifact
+        path: ./*.apk
