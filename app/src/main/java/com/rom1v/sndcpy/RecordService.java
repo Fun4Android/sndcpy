@@ -16,8 +16,8 @@ import android.media.AudioPlaybackCaptureConfiguration;
 import android.media.AudioRecord;
 import android.media.projection.MediaProjection;
 import android.media.projection.MediaProjectionManager;
-import android.net.LocalServerSocket;
-import android.net.LocalSocket;
+import android.net.ServerSocket;
+import android.net.Socket;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
@@ -38,6 +38,7 @@ public class RecordService extends Service {
     private static final int MSG_CONNECTION_ESTABLISHED = 1;
 
     private static final String SOCKET_NAME = "sndcpy";
+    private static final Integer SOCKET_PORT = 28200;
 
 
     private static final int SAMPLE_RATE = 48000;
@@ -122,8 +123,8 @@ public class RecordService extends Service {
         return actionBuilder.build();
     }
 
-    private static LocalSocket connect() throws IOException {
-        LocalServerSocket localServerSocket = new LocalServerSocket(SOCKET_NAME);
+    private static Socket connect() throws IOException {
+        ServerSocket localServerSocket = new ServerSocket(SOCKET_PORT);
         try {
             return localServerSocket.accept();
         } finally {
@@ -161,7 +162,7 @@ public class RecordService extends Service {
         recorderThread = new Thread(new Runnable() {
             @Override
             public void run() {
-                try (LocalSocket socket = connect()) {
+                try (Socket socket = connect()) {
                     handler.sendEmptyMessage(MSG_CONNECTION_ESTABLISHED);
 
                     recorder.startRecording();
