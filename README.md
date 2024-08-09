@@ -1,4 +1,5 @@
-# sndcpy (v1.1)
+# sndcpy (v1.1). 
+
 
 This tool forwards audio from an Android 10 device to the computer. It does not
 require any _root_ access. It works on _GNU/Linux_, _Windows_ and _macOS_.
